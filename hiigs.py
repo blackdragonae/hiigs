@@ -11,7 +11,11 @@ __contributors__ = [
 ]
 
 def hiigs(ve=None, dpath=None):
-    dpath = '~/pyWorkspace/hiidat/'
+    import os
+    mcd = os.path.dirname(os.path.abspath(__file__))
+    
+    dpath = mcd+'/hiidat/'
+    
     ve = 0.0
     
     from mcsne import mcsne
