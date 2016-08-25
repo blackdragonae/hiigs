@@ -23,7 +23,7 @@ def hiigs(ve=None, dpath=None):
     print 'HIIGS: '
     print '+++++++++++++++++++++++++++++++++++++++++++'
 
-    mcsnexp(ve, dpath, clc = 1 , opt = 0)
+    mcsnexp(ve, dpath, clc = 1 , opt = 1)
     
     print 'done'
         

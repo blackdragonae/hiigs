@@ -36,9 +36,12 @@ def lnlike(theta, x, y, w, m, z, xerr, yerr, werr, merr, zerr):
         res = (Mu - Mum)
         xsq = np.sum((Mu-Mum)**2*inv_sigma2)
         llq = -0.5*(xsq)
+        
+        llq2 = -0.5*(np.sum((Mu-Mum)**2*inv_sigma2 - np.log(inv_sigma2)))
+        
         print theta, xsq
         
-        return llq, xsq, res
+        return llq2, xsq, res
     else:
         return -np.inf, np.inf, np.inf   
 def lnprior(theta):
@@ -84,7 +87,9 @@ def lnlike1(theta, x, y, w, m, z, xerr, yerr, werr, merr, zerr):
         
         print theta, xsq
         
-        return llq, xsq, res
+        llq2 = -0.5*(np.sum((Mu-Mum)**2*inv_sigma2 - np.log(inv_sigma2)))
+        
+        return llq2, xsq, res
     else:
         return -np.inf, np.inf, np.inf
 def lnprior1(theta):
@@ -257,8 +262,8 @@ def mcsnexp(ve, dpath, clc = 0 , opt = 0):
     fg0 = clc
     fg1 = opt
     
-    nwk = 100
-    sps = 500
+    nwk = 300
+    sps = 900
     tds = 4
         
     fend ='_mcsnexp'+ str(fg1)#+'z3'
@@ -394,25 +399,26 @@ def mcsnexp(ve, dpath, clc = 0 , opt = 0):
         
     elif fg1 == 1:
         if fg0 == 1:
-            #Maximum likelihood estimation 
-            nll = lambda *args: -lnlike1(*args)[0]
-            result = op.minimize(nll, [alpha_i, beta_i, MB1_i, DM_i, Om_i], 
-            args=(x, y, w, m, z, xErr, yErr, wErr, mErr, zErr), tol = 1e-3)
-        
             # Bayesian Analysis 
             ndim, nwalkers = 5, nwk
-            pos = [result["x"] + 1e-5*np.random.randn(ndim) 
+            pos = [[alpha_i, beta_i, MB1_i, DM_i, Om_i] + 1e-5*np.random.randn(ndim) 
             for i in range(nwalkers)]
-        
+            
+            # Initialize the sampler with the chosen specs.
             sampler = emcee.EnsembleSampler(nwalkers, ndim, lnprob1, 
             args = (x, y, w, m, z, xErr, yErr, wErr, mErr, zErr), 
                threads = tds)
-               
+            
+            # Run 100 steps as a burn-in.
             pos, prob, state = sampler.run_mcmc(pos, 100)
+               
+            # Reset the chain to remove the burn-in samples.
             sampler.reset()
             
-            sampler.run_mcmc(pos, sps, rstate0=state) 
-
+            # Starting from the final position in the burn-in chain
+            sampler.run_mcmc(pos, sps, rstate0=state)
+            
+            # Formating result
             samples = sampler.chain[:, 50:, :].reshape((-1, ndim))
             
             np.save(dpath+'temp/MCMCSNE'+fend+'.npy', samples)
@@ -477,8 +483,8 @@ def mcsnexp(ve, dpath, clc = 0 , opt = 0):
                         truths=[alpha_mcmc[0], beta_mcmc[0], MB1_mcmc[0], 
                            DM_mcmc[0], Om_mcmc[0]], 
                         quantiles = [0.16, 0.84],
-                        range = [(0.11, 0.18), (2.7,3.7), (-19.12, -18.96), 
-                           (-0.12, 0.0), (0.0, 0.5)],
+                        range = [(0.10, 0.16), (2.0,3.5), (-19.12, -18.96), 
+                           (-0.12, 0.0), (0.1, 0.4)],
                         plot_contours = 'true', 
                         levels = 1.0 - np.exp(
                            -0.5 * np.arange(1.0, 3.1, 1.0) ** 2),
