@@ -10,7 +10,7 @@ __contributors__ = [
     'Ricardo Chavez'
 ]
 
-from mcsne import mcsne
+from mcsnexp import mcsnexp
 
 def hiigs(ve=None, dpath=None):
     import os
@@ -23,7 +23,7 @@ def hiigs(ve=None, dpath=None):
     print 'HIIGS: '
     print '+++++++++++++++++++++++++++++++++++++++++++'
 
-    mcsne(ve, dpath, 1, 2)
+    mcsnexp(ve, dpath, clc = 1 , opt = 0)
     
     print 'done'
         
