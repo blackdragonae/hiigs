@@ -10,17 +10,22 @@ __contributors__ = [
     'Ricardo Chavez'
 ]
 
+from mcsne import mcsne
+
 def hiigs(ve=None, dpath=None):
     import os
     mcd = os.path.dirname(os.path.abspath(__file__))
     
     dpath = mcd+'/hiidat/'
+    ve = '1_15'
     
-    ve = 0.0
-    
-    from mcsne import mcsne
-    
+    print '+++++++++++++++++++++++++++++++++++++++++++'
+    print 'HIIGS: '
+    print '+++++++++++++++++++++++++++++++++++++++++++'
+
     mcsne(ve, dpath, 1, 2)
+    
+    print 'done'
         
     return 
     
