@@ -22,7 +22,8 @@ def hiigs(ve=None, dpath=None):
     print '+++++++++++++++++++++++++++++++++++++++++++'
     print 'HIIGS: '
     print '+++++++++++++++++++++++++++++++++++++++++++'
-
+    
+    #Calls the subrutine for SNeIa JLA Sample analysis
     mcsnexp(ve, dpath, clc = 1 , opt = 1)
     
     print 'done'
