@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 # hiigs main module on mraos
-# Modified: Fri 27 Apr 2018 @ lus1/ana
+# Modified: Tue 30 Apr 2024
 
 __all__ = ['main']
 __version__ = "10.0.0"
-__author__ = "Ricardo Chavez (rc681@cam.ac.uk)"
-__copyright__ = "Copyright 2018 Ricardo Chavez"
+__author__ = "Ricardo Chavez (rchavez@irya.unam.mx)"
+__copyright__ = "Copyright 2024 Ricardo Chavez"
 __contributors__ = [
     # Alphabetical by first name.
     'Ricardo Chavez'
@@ -37,7 +37,7 @@ def main():
     # cpath = '/export/data/Chavez/hiigs/resultsMN/'
     # cpath = '/Users/rchavez/h2dat/results/'
 
-    ve = '2'
+    ve = '3'
 
     if len(sys.argv) > 1:
         nsps = int(sys.argv[1])
