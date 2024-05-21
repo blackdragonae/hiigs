@@ -19,7 +19,8 @@ import time
 # import matplotlib
 # matplotlib.use('Agg')
 
-from mch2gv2 import mch2gv2
+# from mch2gv2 import mch2gv2
+from mch2gv79 import mch2gv79
 # from mcsnev11 import mcsnev11
 # from mcbaov6 import mcbaov6
 # from mccmbv10 import mccmbv10
@@ -37,7 +38,7 @@ def main():
     # cpath = '/export/data/Chavez/hiigs/resultsMN/'
     # cpath = '/Users/rchavez/h2dat/results/'
 
-    ve = '3'
+    ve = '190'
 
     if len(sys.argv) > 1:
         nsps = int(sys.argv[1])
@@ -48,13 +49,21 @@ def main():
     print('hiigs: '+ve)
     print('+++++++++++++++++++++++++++++++++++++++++++')
 
-    mch2gv2(ve, dpath, cpath, spl=1, zps=12
-            , opt=1, clc=1, drd=2, obs=1, prs=0, vbs=1
-            # # , a=33.11, aErr=0.145, b=5.05, bErr=0.097 #drd = 1
+    mch2gv79(ve, dpath, cpath, spl=1, zps=40
+            , opt=5, clc=0, drd=2, obs=1, prs=0, vbs=1
+        #     , a=33.11, aErr=0.145, b=5.05, bErr=0.097 #drd = 1
         #     , a=33.268, aErr=0.083, b=5.022, bErr=0.058 #drd = 2
             , a=0.0, aErr=0.0, b=0.0, bErr=0.0 #Dflt
-            , sps=10000, fr0=1
+             , sps=14000, fr0=1, fra=0
             )
+
+    # mch2gv2(ve, dpath, cpath, spl=1, zps=12
+    #         , opt=1, clc=1, drd=2, obs=1, prs=0, vbs=1
+    #         # # , a=33.11, aErr=0.145, b=5.05, bErr=0.097 #drd = 1
+    #     #     , a=33.268, aErr=0.083, b=5.022, bErr=0.058 #drd = 2
+    #         , a=0.0, aErr=0.0, b=0.0, bErr=0.0 #Dflt
+    #         , sps=10000, fr0=1
+    #         )
 
     # mcsnev11(ve, dpath, cpath, clc=1, opt=2, sps=1000, prs=0, vbs=0)
 
