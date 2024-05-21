@@ -6,7 +6,7 @@ In this instance, the Bayesian methodology is implemented through a nested Marko
 
 The code relies on data from multiple cosmological tracers to calculate the cosmological parameters. Cosmological tracers are observable quantities that can provide information about the underlying cosmological model and its parameters. These tracers encompass cosmic microwave background radiation (CMB), Type Ia supernovae (SNIa), baryon acoustic oscillations (BAO), and HII galaxies (HIIG). By amalgamating data from various tracers, the code can more effectively constrain the cosmological parameters and generate more accurate estimates.
 
-Current version:v2
+Current version:v4; includes JWST Data
 
 Built by `Ricardo Chavez <https://www.irya.unam.mx/gente/r.chavez/>`
 Licensed under the 2-clause BSD license (see ``LICENSE``).
